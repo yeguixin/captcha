@@ -1,0 +1,153 @@
+
+%\documentclass[conference]{IEEEtran}
+\documentclass[10pt,conference]{IEEEtran}
+
+\pagestyle{plain}
+
+\usepackage[english,american]{babel}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{float}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage[colorlinks, linkcolor=red, anchorcolor=green, citecolor=blue]{hyperref}
+\usepackage{cite}
+\usepackage{balance}
+\usepackage{color}
+\usepackage[square,sort,comma,numbers]{natbib}
+\usepackage{url}
+\usepackage{diagbox}
+\usepackage{enumerate}
+\usepackage{setspace}
+\let\labelindent\relax
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{etoolbox}
+\usepackage{setspace}
+
+\hyphenation{op-tical net-works semi-conduc-tor}
+%\renewcommand{\baselinestretch}{0.985}
+%\renewcommand{\captionfont}{\linespread{1.5}\normalsize}
+
+%\renewcommand{\thesection}{\arabic{section}}
+%\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+%\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+
+%\makeatletter
+%\def\@seccntformat#1{\@ifundefined{#1@cntformat}%
+%   {\csname the#1\endcsname\quad}%       default
+%   {\csname #1@cntformat\endcsname}}%    enable individual control
+%\newcommand\section@cntformat{}
+%\makeatother
+
+\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+\renewcommand{\algorithmicensure}{\textbf{Output:}}
+%\usepackage{setspace}
+%\usepackage{epsfig,graphics,subfigure,psfrag,amsmath,amssymb}
+\newcommand\FIXME[1]{\textcolor{red}{FIX:}\textcolor{red}{#1}}
+\newcommand\FIXED[1]{\textcolor{blue}{FIXED: }\textcolor{blue}{#1}}
+
+%\def\@IEEEsectpunct{.\ \,}
+%\def\paragraph{\@startsection{paragraph}{4}{\z@}{1.5ex plus 1.5ex minus 0.5ex}%
+%{0ex}{\normalfont\normalsize\sffamily\bfseries}}
+
+
+\newcommand{\circled}[2][]{\tikz[baseline=(char.base)]
+    {\node[shape = circle, draw, inner sep = 1pt]
+    (char) {\phantom{\ifblank{#1}{#2}{#1}}};%
+    \node at (char.center) {\makebox[0pt][c]{#2}};}}
+\robustify{\circled}
+
+\begin{document}
+%\setcopyright{acmcopyright}
+
+\title{Using Facial Behavior Biometric Modalities for Smartphone Authentication}
+\author{
+%\IEEEauthorblockN{Guixin Ye\IEEEauthorrefmark{2},
+%Zhanyong Tang$^{*,}$\IEEEauthorrefmark{2}\thanks{*Corresponding authors: Zhanyong Tang and Zheng Wang},
+%Dingyi Fang\IEEEauthorrefmark{2},
+%Xiaojiang Chen\IEEEauthorrefmark{2},
+%Kwang In Kim\IEEEauthorrefmark{3},
+%Ben Taylor\IEEEauthorrefmark{4}, and
+%Zheng Wang$^{*,}$\IEEEauthorrefmark{4}}
+%\IEEEauthorblockA{\IEEEauthorrefmark{2}School of Information Science and Technology, Northwest University, China\\Email:  gxye@stumail.nwu.edu.cn, \{zytang, dyf, xjchen\}@nwu.edu.cn}
+%\IEEEauthorblockA{\IEEEauthorrefmark{3}Department of Computer Science, University of Bath, UK\\Email: k.kim@bath.ac.uk}
+%\IEEEauthorblockA{\IEEEauthorrefmark{4}School of Computing and Communications, Lancaster University, UK\\Email: \{b.d.taylor, z.wang\}@lancaster.ac.uk}
+}
+
+\IEEEoverridecommandlockouts
+\makeatletter\def\@IEEEpubidpullup{9\baselineskip}\makeatother
+\IEEEpubid{\parbox{\columnwidth}{Permission to freely reproduce all or part
+    of this paper for noncommercial purposes is granted provided that
+    copies bear this notice and the full citation on the first
+    page. Reproduction for commercial purposes is strictly prohibited
+    without the prior written consent of the Internet Society, the
+    first-named author (for reproduction of an entire paper only), and
+    the author's employer if the paper was prepared within the scope
+    of employment.  \\
+    NDSS '17, 26 February -1 March 2017, San Diego, CA, USA\\
+    Copyright 2017 Internet Society, ISBN 1-891562-41-X\\
+    http://dx.doi.org/10.14722/ndss.2017.23xxx
+}
+\hspace{\columnsep}\makebox[\columnwidth]{}}
+
+\maketitle
+
+\begin{abstract}
+
+Pattern lock is widely used as a mechanism for authentication and authorization on Android devices. This paper presents a novel video-based attack to reconstruct Android lock patterns from video footage filmed using a mobile phone camera. Unlike prior attacks on pattern lock, our approach does not require the video to capture any content displayed on the screen. Instead, we employ a computer vision algorithm to track the fingertip movements to infer the pattern. Using the geometry information extracted from the tracked fingertip motions, our approach is able to accurately identify a small number of
+(often one) candidate patterns to be tested by an adversary.
+We  thoroughly evaluated our approach using 120 unique patterns collected from 215 independent users, by applying it to reconstruct patterns from video footage filmed using smartphone cameras. Experimental results show that our approach can break over 95\% of the patterns in five attempts before the device is automatically locked by the Android operating system. We discovered that, in contrast to many people's belief, complex patterns do not offer stronger protection under our attacking scenarios. This is demonstrated by the fact that we are able to break all but one complex patterns
+as opposed to  60\% of the simple patterns in the first attempt. Since our threat model is common in
+day-to-day life, this paper calls for the community to revisit the risks of using Android pattern lock to protect sensitive information.
+\\
+\end{abstract}
+
+
+%\begin{CCSXML}
+%<ccs2012>
+%<concept>
+%<concept_id>10002978.10002991.10002992.10011618</concept_id>
+%<concept_desc>Security and privacy~Graphical / visual passwords</concept_desc>
+%<concept_significance>500</concept_significance>
+%</concept>
+%<concept>
+%<concept_id>10002978.10003014.10003017</concept_id>
+%<concept_desc>Security and privacy~Mobile and wireless security</concept_desc>
+%<concept_significance>300</concept_significance>
+%</concept>
+%</ccs2012>
+%\end{CCSXML}
+%
+%\ccsdesc[500]{Security and privacy~Graphical / visual passwords}
+%\ccsdesc[300]{Security and privacy~Mobile and wireless security}
+%
+%\printccsdesc
+% no keywords
+%\keywords{Side-channel Attack, Android Pattern Lock, Authentication, Motion Tracking, Vision Analysis}\\
+
+%TODO:
+% Read: A pilot study on the security of pattern screen-lock methods and soft side channel attacks
+\input{introduction}
+%\input{background}
+%\input{overview}
+%\input{details}
+%\input{material}
+%\input{related}
+
+\section*{Acknowledgements}
+    We would like to thank all participants who help for completing the experiments. Thank all volunteers for their time and insights as well as the anonymous reviewer for their critical and constructive comments. This work was supported by NSFC (Grant No. 61672427) and the UK Engineering and Physical Sciences Research Council (Grants No. EP/M01567X/1(SANDeRs) and EP/M015793/1(DIVIDEND)).
+
+%\begin{spacing}{0.98}
+\bibliographystyle{IEEEtranS}
+\balance
+\bibliography{refs}
+%\end{spacing}
+
+\end{document}
