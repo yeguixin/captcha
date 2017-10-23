@@ -30,6 +30,7 @@
 \usepackage{listings}
 \usepackage{etoolbox}
 \usepackage{setspace}
+\usepackage{amsfonts}
 
 \hyphenation{op-tical net-works semi-conduc-tor}
 %\renewcommand{\baselinestretch}{0.985}
@@ -53,6 +54,8 @@
 \newcommand\FIXME[1]{\textcolor{red}{FIX:}\textcolor{red}{#1}}
 \newcommand\FIXED[1]{\textcolor{blue}{FIXED: }\textcolor{blue}{#1}}
 
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+
 %\def\@IEEEsectpunct{.\ \,}
 %\def\paragraph{\@startsection{paragraph}{4}{\z@}{1.5ex plus 1.5ex minus 0.5ex}%
 %{0ex}{\normalfont\normalsize\sffamily\bfseries}}
@@ -64,10 +67,17 @@
     \node at (char.center) {\makebox[0pt][c]{#2}};}}
 \robustify{\circled}
 
+\newcommand{\circling}[2][]{\tikz[baseline=(char.base)]
+    {\node[shape = circle, draw = gray!100, inner sep = 1pt, fill= gray!100]
+    (char) {\phantom{\ifblank{#1}{#2}{#1}}};%
+    \node at (char.center) {\makebox[0pt][c]{#2}};}}
+\robustify{\circled}
+
+
 \begin{document}
 %\setcopyright{acmcopyright}
 
-\title{Using Facial Behavior Biometric Modalities for Smartphone Authentication}
+\title{When Deep Learning Meets Captcha}
 \author{
 %\IEEEauthorblockN{Guixin Ye\IEEEauthorrefmark{2},
 %Zhanyong Tang$^{*,}$\IEEEauthorrefmark{2}\thanks{*Corresponding authors: Zhanyong Tang and Zheng Wang},
@@ -101,14 +111,12 @@
 
 \begin{abstract}
 
-Pattern lock is widely used as a mechanism for authentication and authorization on Android devices. This paper presents a novel video-based attack to reconstruct Android lock patterns from video footage filmed using a mobile phone camera. Unlike prior attacks on pattern lock, our approach does not require the video to capture any content displayed on the screen. Instead, we employ a computer vision algorithm to track the fingertip movements to infer the pattern. Using the geometry information extracted from the tracked fingertip motions, our approach is able to accurately identify a small number of
-(often one) candidate patterns to be tested by an adversary.
-We  thoroughly evaluated our approach using 120 unique patterns collected from 215 independent users, by applying it to reconstruct patterns from video footage filmed using smartphone cameras. Experimental results show that our approach can break over 95\% of the patterns in five attempts before the device is automatically locked by the Android operating system. We discovered that, in contrast to many people's belief, complex patterns do not offer stronger protection under our attacking scenarios. This is demonstrated by the fact that we are able to break all but one complex patterns
-as opposed to  60\% of the simple patterns in the first attempt. Since our threat model is common in
-day-to-day life, this paper calls for the community to revisit the risks of using Android pattern lock to protect sensitive information.
-\\
+CAPTCHA is a standard secure mechanism to automated tell computers and humans, and is applied to prevent against malicious bot programs. Current text-based Captcha mechanism combines many anti-segmentation and anti-recognition features such as sophisticated noisy background, character rotation, distortion and overlapping. Such mechanism is widely deployed by Google, Microsoft, Baidu, Alibaba. Many attacks on text-based Captcha have been proposed. However, most of these fine prior works focus on a unique Captcha mechanism, making them have a limited applicability. In this paper, we demonstrate a novel generic attack on current text-based Captcha. We employ the Generative Adversarial Networks (GANs) to translate the original Captcha to the regular one. Using the translated regular Captcha to train a Convolutional Neural Network (CNN) model, our approach is able to accurately identify the Captcha. We thoroughly evaluated our approach using real-world Captchas, and achieve a success rate of over XX with an average speed of 76ms on an ordinary server (with a 3.2-GHz Inter Xeon CPU with 100-GB RAM and a TITAN Xp GPU). We discovered that, the Captcha with complex noisy background do not defend against segmentation under our attack. This is demonstrated by the fact that we are able to remove the complex background from the Captcha image. Since our attack can identify a widely text-based Captchas, this paper calls the community to revisit the risks of using text-based Captcha to defend against malicious bots.
 \end{abstract}
 
+\begin{IEEEkeywords}
+    Captcha, Security, Generic Attack, Text-based
+\end{IEEEkeywords}
 
 %\begin{CCSXML}
 %<ccs2012>
@@ -130,15 +138,19 @@ day-to-day life, this paper calls for the community to revisit the risks of usin
 %
 %\printccsdesc
 % no keywords
-%\keywords{Side-channel Attack, Android Pattern Lock, Authentication, Motion Tracking, Vision Analysis}\\
+%\keywords{Captcha, Security, GAN, Text-based}\\
 
 %TODO:
 % Read: A pilot study on the security of pattern screen-lock methods and soft side channel attacks
 \input{introduction}
-%\input{background}
-%\input{overview}
-%\input{details}
-%\input{material}
+\input{background}
+\input{generator}
+\input{overview}
+\input{details}
+\input{experimental_setup}
+\input{results}
+\input{related}
+%\input{materials}
 %\input{related}
 
 \section*{Acknowledgements}
