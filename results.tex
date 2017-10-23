@@ -1,6 +1,24 @@
-\section{Experimental Results} 
-In this section, we first present the overall success rate for breaking the Captchas collected from the target websites. Our results shows that the overall success rate range from XX to XX. 
+\section{Experimental Results}
+In this section, we first present the overall success rate for breaking the Captchas collected from the target websites. Our results shows that the overall success rates range from XX to XX.
 We then analyze how the success rate is affected by the number of the training Captchas.
 Finally, we demonstrate the risks of our attacking approach by simulating a real world attacking process before evaluating the robustness of the secure features using variant types of text-based Captchas.
 
+\begin{table}[t]
+    \centering
+    \caption{The overall success rate and average attack speeds for each Captcha scheme.}
+    \label{table: feature_number}
+    \begin{tabular}{lcc}
+        \toprule
+        Scheme & Success rate  & Speed (ms)\\
+        \midrule
+        Baidu & 67\% & 70 \\
+        Alipay & 86\% & 72 \\
+        NetEase & 45\% & 74 \\
+        VIPSHOP & 90\% & 65 \\
+        TOUP & 69\% & 50 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
 \subsection{Overall Success Rate}
+In this experiment, the training data were synthesized used our Captcha generator, and the number of each training Captcha scheme is 20000. The corresponding testing data were collected from the target websites and its number is 2000.
