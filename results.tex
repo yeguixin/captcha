@@ -1,19 +1,19 @@
 \section{Experimental Results}
-In this section, we first present the overall success rate for breaking the Captchas collected from the target websites. Our results shows that the overall success rates range from XX to XX.
+In this section, we first present the overall success rate for breaking the Captchas collected from the target websites. Our results shows that the overall success rates range from \textcolor{red}{45\%} to \textcolor{red}{90\%} speeding no more than 80 millseconds.
 We then analyze how the success rate is affected by the number of the training Captchas.
 Finally, we demonstrate the risks of our attacking approach by simulating a real world attacking process before evaluating the robustness of the secure features using variant types of text-based Captchas.
 
 \begin{table}[t]
     \centering
     \caption{The overall success rate and average attack speeds for each Captcha scheme.}
-    \label{table: feature_number}
+    \label{table: overall_rate}
     \begin{tabular}{lcc}
         \toprule
         Scheme & Success rate  & Speed (ms)\\
         \midrule
-        Baidu & 67\% & 70 \\
+        Baidu & 45\% & 70 \\
         Alipay & 86\% & 72 \\
-        NetEase & 45\% & 74 \\
+        NetEase & 67\% & 74 \\
         VIPSHOP & 90\% & 65 \\
         TOUP & 69\% & 50 \\
         \bottomrule
@@ -22,3 +22,145 @@ Finally, we demonstrate the risks of our attacking approach by simulating a real
 
 \subsection{Overall Success Rate}
 In this experiment, the training data were synthesized used our Captcha generator, and the number of each training Captcha scheme is 20000. The corresponding testing data were collected from the target websites and its number is 2000.
+\subsubsection{Evaluation using current text-based Captchas}
+Table~\ref{table: overall_rate} shows the success rate for breaking different text-based Captcha schemes and it ranges from 45\% to 90\%. For VIOSHOP scheme, we are able to successfully cracking 90\% Captchas as our attacking approach can effectively remove the complex background as well as expand the space of adjacent characters. For Baidu Captchas, the success rate decreases to 45\%. This is because Baidu uses almost two different styles of Captcha scheme shown in Table~\ref{tab: captcha_show}. Further, it exploits both hollow and solid fonts. These designs make such scheme more complex than other Captchas and more difficult to be recognized.
+On average, the breaking speeds for each Captcha image is no more than 80 milliseconds.
+In general, our cracking success rate is far more than 1\%, the secure threshold defined by~\cite{Bursztein2011Text}, which means our approach pose a great threat to current widely used text-based Captchas.
+
+\begin{table}[t]
+    \centering
+    \caption{The overall success rate and average attack speeds for each Captcha scheme.}
+    \label{table: overall_rate}
+    \small
+    \begin{tabular}{|c|c|c|c|c|c|}
+        \hline
+        & \multicolumn{2}{|c|}{Success rate}& & \multicolumn{2}{|c|}{Success rate}\\
+        \cline{2-3} \cline{5-6}
+        \multirow{-2}{*}{Scheme} & ref.~\cite{Bursztein2011Text} & ours & \multirow{-2}{*}{Scheme} & ref.~\cite{Gao2016A} & ours \\
+        \hline
+        Authorize & 66\% & & reCaptcha & 77.2\% & 96.62\% \\
+        \hline
+        Blizzaer & 70\% & & Yahoo! & 5.2\% & \\
+        \hline
+        Captcha.net & 73\% & & Baidu & 46.6\% & \\
+        \hline
+        Digg & 20\% & & Wikipedia & 23.8\% & \\
+        \hline
+        eBay & 43\% & & QQ & 56\% & \\
+        \hline
+        Megaupload & 93\% & & Microsoft & 16.2\% & \\
+        \hline
+        NIH & 72\% & & Amazon & 25.8\% & \\
+        \hline
+        Reddit & 42\% & & Taobao & 23.4\% & \\
+        \hline
+        Slashdot & 35\% & & Sina & 9.4\% & \\
+        \hline
+        Wikipedia & 25\% & & eBay & 58.8\% & \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\subsubsection{Evaluating using Previous text-based Captchas}
+In this section, we compare our result with previous work~\cite{Bursztein2011Text,Gao2016A} using the previous text-based Captchas.
+For the previous Captchas, the real world testing data are hard to be collected because most websites have updated their Captcha scheme which is more complex than prior one. To acquire the true previous Captchas, we first use some online Captcha generator such as Captcha.net to produce the true Captcha images. We then employ the generators that previous papers has provided to generate Captchas. If neither of the two cases, we use our Captcha generator to produce the testing data.
+
+Figure~\ref{fig: generate_show} depicts some Captcha examples of the previous real world Captchas and our generated versions that produced by our generator (Section~\ref{section: Captcha_generator}). Recall that our Captcha generator is able to generate the similar style Captchas with the real world Captcha scheme. So the generated Captcha has some subtle differences from the real one. For example, Figure~\ref{fig: generate_show} (e) shows the real Captcha deployed by Microsoft, and it slightly different from the generated one shown in (f) because the each character on Captcha image is randomly rotated and distorted.
+Nevertheless, the generated Captchas contain the main features of the original real world Captchas.
+
+\textcolor{red}{show the results}
+
+\begin{figure}
+  \centering
+  \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/reCAPTCHA_prior.png}\\
+        \center (a) reCAPTCHA
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/reCAPTCHA_generator.png}\\
+        \center (b) Generated version
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/yahoo_prior.png}\\
+        \center (c) Yahoo!
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/yahoo_generator.png}\\
+        \center (d) Generated version
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/microsoft_prior.png}\\
+        \center (e) Microsoft
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/microsoft_generator.png}\\
+        \center (f) Generated version
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/amazon_prior.png}\\
+        \center (g) Amazon
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/amazon_generator.png}\\
+        \center (h) Generated version
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/baidu_prior.png}\\
+        \center (i) Baidu
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.2\textwidth}
+        \includegraphics[width=0.9\textwidth]{fig/generate_captchas/baidu_generator.png}\\
+        \center (j) Generated version
+    \end{minipage}
+    }
+  \caption{Some examples of the real world Captchas and the corresponding generated version. The Captchas on the left column are the previous real world schemes and on the right column are the corresponding generated version.}
+  \label{fig: generate_show}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.45\textwidth]{fig/training_set.pdf}
+  \caption{Impact of the number of training set.}
+  \label{fig: training_set}
+\end{figure}
+
+
+\subsection{Impact of the number of training data}
+We would like to know how the number of training examples affects the success rate of the attack. To do so, we used all the collected Captchas and we varied the number of training Captchas from 1000 to 100000 for each scheme. Figure~\ref{fig: training_set} shows how the cracking success rate changes as the number of training Captchas increases. When the size of the training examples is 100000, our approach can break 97.5\% VISHOP Captchas, 96.6\% Alipay Captchas, 80.4\% TOUP Captchas, 79.6\% BetEase Captchas and 48\% Baidu Captchas respectively. The success rate drops significantly when the number of training Captchas is less than 10000. Beyond this point, our approach cannot extract representative features of the Captchas. The degradation features makes it difficult for our algorithm to successful recognize the content of the Captcha image.
+Due to the degradation, our approach can just crack 2.65\% Baidu Captchas, 3.45\% NetEase Captchas, 4.25\% Alipay Captchas, 7.55\% TOUP Captchas and 10.4\% VISHOP Captchas respectively when the number of training examples is only 1000. Nonetheless, the success rates are higher than 1\%, the security threshold that determines whether or not the Captcha is secure.
+Generally, our approach can achieve a high success rate when the number of training examples is 20000.
+
+\subsection{Impact of Security Features}
+Intuitively, the success rate of the attack would be influenced by the number of security features used by the Captcha because the complexity of the Captcha depends on the number of the security features. To evaluate this effect, we choose the common used security feature such as overlapping, rotating, distortion, waving and background for the experiment.
+First, we evaluate how the single security feature effect the success rate. We then evaluate our attack using our synthetic Captchas which combines of a number of security features. Note that the synthetic Captchas are more complex than current any real world Captcha scheme. At last, we generate a most complicated Captcha using all security features to evaluate our approach.
+
+\noindent \emph{1) Evaluation of single security feature}
+
+\textbf{Overlapping.} Overlapping decreases the space between adjacent characters and makes them collapsed, and it is considered the most effective anti-segmentation security features~\cite{Bursztein2011Text} which is widely used by lots of popular websites.
+
+We use the TOUP scheme as a case study to evaluate the security of overlapping. We modify the original TOUP Captchas through increasing character overlapping by 4, 6, 8 and 10 pixels\footnote{The overlapping of the original Captcha is no more than 3 pixels.}, respectively. For each overlapped Captchas, we generated 20000 training examples and 2000 testing examples. We then run our attack on these synthetic overlapped Captchas, and our new success rate are 65\%, 50.05\%, 42.55\% and 25.1\%, respectively.  This result demonstrates the more overlapped the characters, the less successful our approach would be. Although the success rate drops significantly when the character overlapping more than 6 pixels, it still pose a real threat to Captcha and also superior to human because human cannot recognize the Captcha when the character overlapping reaches 6 pixels~\cite{Bursztein2014The}.
+
+\textbf{Rotating.} To evaluate how the character rotating effects the success rate, we choose the Alipay scheme for implementing the experiment as Alipay Captcha randomly rotates the character. This is more difficult than rotating in one single direction. The rotating angle of Alipay is less than 15 degrees through our careful analysis. In this experiment, we increases the random rotating angle by 30 degrees. We use 20000 such Captchas for training and 2000 for testing, and our approach can achieve a success rate of 80.5\%, a little lower than the original success rate of 86.15\%. This indicates rotating does not have a positive effect in enhancing the security of Captcha under our attack. 
+
+\textbf{Distorting.} Character distortion is widely used by most current text-based Captcha schemes. It can confuse the bot program for recognizing the similar distorted characters. For example, the character "O" and the number "0" looks very similar when they are distorted. This makes the malicious bots misidentifying "O" as "0" or "0" as "O". 
+
+In this experiment, we generate 20000 training Captchas which are similar to the Alipay scheme. But the generated Captchas are more distorted than Alipay scheme. Using 2000 Captchas for testing, our approach is able to crack 67.5\% which is lower than the original success rate of 90.10\%. This indicates character distorting can enhancing the security of Captcha. 
