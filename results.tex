@@ -149,18 +149,55 @@ We would like to know how the number of training examples affects the success ra
 Due to the degradation, our approach can just crack 2.65\% Baidu Captchas, 3.45\% NetEase Captchas, 4.25\% Alipay Captchas, 7.55\% TOUP Captchas and 10.4\% VISHOP Captchas respectively when the number of training examples is only 1000. Nonetheless, the success rates are higher than 1\%, the security threshold that determines whether or not the Captcha is secure.
 Generally, our approach can achieve a high success rate when the number of training examples is 20000.
 
+\begin{table*}
+    \centering
+    \caption{The success rate of each combinations security features}
+    \label{table: combinations_resuts}
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+        No. & Sample Captcha & Overlapping & Rotating & Distorting & Waving & Success Rate \\
+        \hline
+        \tabincell{c}{1} & \tabincell{c}{\includegraphics[width=0.1\textwidth]{fig/combination/combination1.jpg}} & \tabincell{c}{$\surd$} & \tabincell{c}{$\surd$} & & & 74.85\% \\
+        \hline
+        2 & \tabincell{c}{\includegraphics[width=0.1\textwidth]{fig/combination/combination2.jpg}} & $\surd$ &  & $\surd$ & & 65.05\% \\
+        \hline
+        3 & & $\surd$ &  & & $\surd$ &  \\
+        \hline
+        4 & \tabincell{c}{\includegraphics[width=0.1\textwidth]{fig/combination/combination4.jpg}} &  & $\surd$ & $\surd$ & & 64.95\% \\
+        \hline
+        5 & & & $\surd$ & & $\surd$ &  \\
+        \hline
+        6 & & & & $\surd$ & $\surd$ &  \\
+        \hline
+        7 & \tabincell{c}{\includegraphics[width=0.1\textwidth]{fig/combination/combination7.jpg}} & $\surd$ & $\surd$ & $\surd$ & & 57.50\% \\
+        \hline
+        8 & & $\surd$ & $\surd$ & $\surd$ & $\surd$ &  \\
+        \hline
+        9 & & \multicolumn{4}{|c|}{All security features} & \\
+        \hline
+    \end{tabular}
+\end{table*}
+
 \subsection{Impact of Security Features}
-Intuitively, the success rate of the attack would be influenced by the number of security features used by the Captcha because the complexity of the Captcha depends on the number of the security features. To evaluate this effect, we choose the common used security feature such as overlapping, rotating, distortion, waving and background for the experiment.
-First, we evaluate how the single security feature effect the success rate. We then evaluate our attack using our synthetic Captchas which combines of a number of security features. Note that the synthetic Captchas are more complex than current any real world Captcha scheme. At last, we generate a most complicated Captcha using all security features to evaluate our approach.
+Intuitively, the success rate of the attack would be influenced by the number of security features used by the Captcha because the complexity of the Captcha depends on the number of the security features. To evaluate this effect, we choose the commonly used security feature such as overlapping, rotating, distortion, waving and background for the experiment.
+First, we evaluate how a single commonly used security feature effect the success rate. We then evaluate our attack using our synthetic Captchas which combines of a number of commonly used security features. Note that the synthetic Captchas are more complex than current any real world Captcha scheme. At last, we generate a most complicated Captcha using all security features to evaluate our approach.
 
 \noindent \emph{1) Evaluation of single security feature}
 
-\textbf{Overlapping.} Overlapping decreases the space between adjacent characters and makes them collapsed, and it is considered the most effective anti-segmentation security features~\cite{Bursztein2011Text} which is widely used by lots of popular websites.
+\textbf{Overlapping.} Overlapping decreases the space between adjacent characters and makes them collapsed, and it is considered the most effective anti-segmentation security feature~\cite{Bursztein2011Text} which is widely deployed by lots of popular websites.
 
 We use the TOUP scheme as a case study to evaluate the security of overlapping. We modify the original TOUP Captchas through increasing character overlapping by 4, 6, 8 and 10 pixels\footnote{The overlapping of the original Captcha is no more than 3 pixels.}, respectively. For each overlapped Captchas, we generated 20000 training examples and 2000 testing examples. We then run our attack on these synthetic overlapped Captchas, and our new success rate are 65\%, 50.05\%, 42.55\% and 25.1\%, respectively.  This result demonstrates the more overlapped the characters, the less successful our approach would be. Although the success rate drops significantly when the character overlapping more than 6 pixels, it still pose a real threat to Captcha and also superior to human because human cannot recognize the Captcha when the character overlapping reaches 6 pixels~\cite{Bursztein2014The}.
 
-\textbf{Rotating.} To evaluate how the character rotating effects the success rate, we choose the Alipay scheme for implementing the experiment as Alipay Captcha randomly rotates the character. This is more difficult than rotating in one single direction. The rotating angle of Alipay is less than 15 degrees through our careful analysis. In this experiment, we increases the random rotating angle by 30 degrees. We use 20000 such Captchas for training and 2000 for testing, and our approach can achieve a success rate of 80.5\%, a little lower than the original success rate of 86.15\%. This indicates rotating does not have a positive effect in enhancing the security of Captcha under our attack. 
+\textbf{Rotating.} To evaluate how the character rotating effects the success rate, we choose the Alipay scheme for implementing the experiment as Alipay Captcha randomly rotates the character. This is more difficult than other scheme which rotates the character in one single direction. The rotating angle of Alipay is less than 15 degrees through our careful analysis. In this experiment, we increases the random rotating angle to 30 degrees. We use 20000 such Captchas for training and 2000 for testing, and our approach can achieve a success rate of 80.5\%, a little lower than the original success rate of 86.15\%. This indicates rotating does not have a positive effect in enhancing the security of Captcha under our attack.
 
-\textbf{Distorting.} Character distortion is widely used by most current text-based Captcha schemes. It can confuse the bot program for recognizing the similar distorted characters. For example, the character "O" and the number "0" looks very similar when they are distorted. This makes the malicious bots misidentifying "O" as "0" or "0" as "O". 
+\textbf{Distorting.} Character distortion is widely used by most current text-based Captcha schemes. It can confuse the bot program for recognizing the similar distorted characters. For example, the character "O" and the number "0" looks very similar when they are distorted. This makes the malicious bots misidentifying "O" as "0" or "0" as "O".
 
-In this experiment, we generate 20000 training Captchas which are similar to the Alipay scheme. But the generated Captchas are more distorted than Alipay scheme. Using 2000 Captchas for testing, our approach is able to crack 67.5\% which is lower than the original success rate of 90.10\%. This indicates character distorting can enhancing the security of Captcha. 
+In this experiment, we generate 20000 training Captchas which are similar to the Alipay scheme. But the generated Captchas are more distorted than Alipay scheme. Using 2000 Captchas for testing, our approach is able to crack 67.5\% which is lower than the original success rate of 90.10\%. This indicates that although character distortion enhancing the security of Captcha to some extent, our approach can still break such Captcha with a high success rate. 
+
+\textbf{Waving.} In this evaluation, we use the Captcha generator proposed by Tuan~\emph{et al.}~\cite{Le2017Using} to produce 20000 training examples for training. Using the trained model, our approach is able to recognize 1977 out of 2000 testing Captchas, and have a success rate of 98.85\%, higher than Tuan's success rate of 93.6\%. We only failed to break 23 Captchas because our model is confused by some similar waving characters such as character "O" and number "0", character "1" and "l", \emph{etc}.  This experiment demonstrates that waving transformation of characters does not contribute to enhancing the security of Captcha under our attack. 
+
+
+\noindent \emph{2) Evaluation of combining security features}
+
+Combination security features can offer a more secure protection than a single one. In this section, we perform a number of experiments to test various combinations of the security features, and evaluate how each combination effects our attack. We conduct this experiment to search whether or not having a combination can defeat against our attack. We choose four basic security features from which we design eight different combinations and we test all of them. We select Alipay Captcha for our experiments, and the size of training and test set is 20000 and 2000, respectively. Table~\ref{table: combinations_resuts} summaries the experiment results.
+
