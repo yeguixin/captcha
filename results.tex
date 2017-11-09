@@ -44,7 +44,7 @@ In general, our cracking success rate is far more than 1\%, the secure threshold
         \hline
         Captcha.net & 73\% & & Baidu & 46.6\% & 95.62\% & CNN & 51.09\% & & PayPal & 57.1\% & \\
         \hline
-        Digg & 20\% & & Wikipedia & 23.8\% & & eBay & 51.39\% & 99.46\% & & &  \\
+        Digg & 20\% & & Wikipedia & 23.8\% & & eBay & 51.39\% & 99.46\% & MNIST & 97.89\% & 97.45\% \\
         \hline
         eBay & 43\% & & QQ & 56\% & & ReCaptcha(2011) & 22.67\% & & & &\\
         \hline
@@ -62,13 +62,13 @@ In general, our cracking success rate is far more than 1\%, the secure threshold
 \end{table*}
 
 \subsubsection{Evaluating using Previous text-based Captchas}
-In this section, we compare our result with previous works~\cite{Bursztein2011Text,Gao2016A} using the previous text-based Captchas.
+In this section, we compare our result with previous works~\cite{Bursztein2011Text,Gao2016A,Bursztein2014The,George2017A} using the previous text-based Captchas.
 For the previous Captchas, the real world testing data are hard to be collected because most websites have updated their Captcha scheme which is more complex than prior one. To acquire the true previous Captchas, we first use some online Captcha generator such as Captcha.net to produce the true Captcha images. We then employ the generators that previous papers has provided to generate Captchas. If neither of the two cases, we use our Captcha generator to produce the testing data.
 
 Figure~\ref{fig: generate_show} depicts some Captcha examples of the previous real world Captchas and our generated versions that produced by our generator (Section~\ref{section: Captcha_generator}). Recall that our Captcha generator is able to generate the similar style Captchas with the real world Captcha scheme. So the generated Captcha has some subtle differences from the real one. For example, Figure~\ref{fig: generate_show} (e) shows the real Captcha deployed by Microsoft, and it slightly different from the generated one shown in (f) because the each character on Captcha image is randomly rotated and distorted.
 Nevertheless, the generated Captchas contain the main features of the original real world Captchas.
 
-\textcolor{red}{show the results}
+\textcolor{red}{The experimental results show that}
 
 \begin{figure}
   \centering
@@ -199,7 +199,7 @@ In this experiment, we generate 20000 training Captchas which are similar to the
 
 \noindent \emph{2) Evaluation of combining security features}
 
-Combination security features can offer a more secure protection than a single one. In this section, we perform a number of experiments to test various combinations of the security features, and evaluate how each combination effects our attack. We conduct this experiment to search whether or not having a combination can defeat against our attack. We choose four basic security features from which we design eight different combinations and we test all of them. We select Alipay Captcha for our experiments, and the size of training and test set is 20000 and 2000, respectively. 
+Combination security features can offer a more secure protection than a single one. In this section, we perform a number of experiments to test various combinations of the security features, and evaluate how each combination effects our attack. We conduct this experiment to search whether or not having a combination can defeat against our attack. We choose four basic security features from which we design eight different combinations and we test all of them. We select Alipay Captcha for our experiments, and the size of training and test set is 20000 and 2000, respectively.
 
 Table~\ref{table: combinations_resuts} summaries the experiment results, listing a number of combinations of security features along with its influence on the success rate of our attack.
-The results suggest the following insights.  Firstly, the combinations of two or more security features are indeed more secure than just a single one. Secondly, character overlapping or distorting can offer a stronger protection than rotating or waving because overlapping or distorting changes the style of character which indeed enhances security. This can be proved by the results of experiments No. 1 - 6. Lastly, the combination of all security features has a positive effect on defeat against our attack. However, our approach is able to crack 46.30\% such Captchas, much higher than 1\% at which Captchas is considered ineffective. On the other hand, it will decreases the usability when blindly using more security features. Nonetheless, our attack still can crack all the complex schemes with a high success rate. Therefore, the text-base Captcha is no longer a secure scheme to prevent the malicious bot programs. 
+The results suggest the following insights.  Firstly, the combinations of two or more security features are indeed more secure than just a single one. Secondly, character overlapping or distorting can offer a stronger protection than rotating or waving because overlapping or distorting changes the style of character which indeed enhances security. This can be proved by the results of experiments No. 1 - 6. Lastly, the combination of all security features has a positive effect on defeat against our attack. However, our approach is able to crack 46.30\% such Captchas, much higher than 1\% at which Captchas is considered ineffective. On the other hand, it will decreases the usability when blindly using more security features. Nonetheless, our attack still can crack all the complex schemes with a high success rate. Therefore, the text-base Captcha is no longer a secure scheme to prevent the malicious bot programs.
