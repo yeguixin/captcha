@@ -1,3 +1,10 @@
+\begin{figure*}[!t]
+  \centering
+  \includegraphics[width=0.9\textwidth]{fig/overview.pdf}
+  \caption{The overview of our attack.}
+  \label{fig:overview}
+\end{figure*}
+
 \section{Background}
 
 \subsection{Text-based Captchas}
@@ -14,13 +21,6 @@ We list the two fratures as follows:
 \textbf{3. Overlapping} Decreasing the space between the adjacent characters to make them collapsed.
 
 \noindent \textbf{Anti-recognition features} \textbf{1. Character Set} Which charset the text-based Captchas scheme uses. Some schemes only include English letters while some schemes consist of both English letters and Arabic numerals. \textbf{2. Font Style} Using multiple font styles such as solid font, hollow font or font compromise of dots. \textbf{3. Font Size} Using random font size when generating Captcha. \textbf{4. Font Color} Using variable font colors. \textbf{5. Distortion} Distorting characters using attractor fields. \textbf{6. Rotating} Rotating characters with random angles. \textbf{7. Waving} Distorting the characters in a wave fashion.
-
-\begin{figure*}[!t]
-  \centering
-  \includegraphics[width=0.9\textwidth]{fig/overview.pdf}
-  \caption{The overview of our attack.}
-  \label{fig:overview}
-\end{figure*}
 
 \subsubsection{Previous Captcha Scheme}
 According to the~\cite{Gao2016A}, the previous text-based Captchas can be classified into three categories: character isolated Captcha (Figure~\ref{fig:text-based captchas} (a)), hollow character Captcha (Figure~\ref{fig:text-based captchas} (c)) and Connecting Characters Together (CCT) Captcha (Figure~\ref{fig:text-based captchas} (b) and (d)) based on font style and the space between adjacent characters. Obviously, most of previous text-based Captchas use a single anti-segmentation or anti-recognition features. For examples, Figure~\ref{fig:text-based captchas} (a) only uses one single anti-recognition feature (slight rotating) and Figure~\ref{fig:text-based captchas} (b) uses one anti-segmentation feature (character overlapping) and one anti-recognition feature (character waving).

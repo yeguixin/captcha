@@ -20,6 +20,74 @@ Finally, we demonstrate the risks of our attacking approach by simulating a real
     \end{tabular}
 \end{table}
 
+\begin{figure}
+  \centering
+  \subfigure{
+    \begin{minipage}[t]{0.45\textwidth}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/0-1.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/0-2.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/0-7.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/0-8.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/0-9.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/0-10.png}
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.45\textwidth}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/4-1.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/4-2.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/4-5.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/4-6.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/4-7.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/4-8.png}
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.45\textwidth}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/8-9.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/8-10.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/8-3.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/8-4.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/8-5.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_mnist/8-6.png} \\
+        \centering (a) MNIST dataset
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.45\textwidth}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/0-1.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/0-2.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/0-7.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/0-8.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/0-9.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/0-10.png}
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.45\textwidth}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/D-1.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/D-2.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/D-5.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/D-6.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/D-7.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/D-8.png}
+    \end{minipage}
+    }
+    \subfigure{
+    \begin{minipage}[t]{0.45\textwidth}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/o-1.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/o-2.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/o-7.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/o-8.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/o-13.png}
+        \includegraphics[width=0.15\textwidth]{fig/experiment_onechar/o-14.png} \\
+        \centering (b) Single character dataset
+    \end{minipage}
+    }
+  \caption{This figure shows some examples of original samples and their regular one transformed by our approach.}
+  \label{fig: mnist_show}
+\end{figure}
+
 \subsection{Overall Success Rate}
 In this experiment, the training data were synthesized used our Captcha generator, and the number of each training Captcha scheme is 20000. The corresponding testing data were collected from the target websites and its number is 2000.
 \subsubsection{Evaluation using current text-based Captchas}
@@ -46,7 +114,7 @@ In general, our cracking success rate is far more than 1\%, the secure threshold
         \hline
         Digg & 20\% & & Wikipedia & 23.8\% & 76.38\% & eBay & 51.39\% & 99.46\% & MNIST & 97.89\% & 97.45\% \\
         \hline
-        eBay & 43\% & & QQ & 56\% & & ReCaptcha(2011) & 22.67\% & & & &\\
+        eBay & 43\% & 98.9\% & QQ & 56\% & & ReCaptcha(2011) & 22.67\% & & & &\\
         \hline
         Megaupload & 93\% & & Microsoft & 16.2\% & & ReCaptcha(2013) & 22.34\% & & & & \\
         \hline
@@ -62,7 +130,7 @@ In general, our cracking success rate is far more than 1\%, the secure threshold
 \end{table*}
 
 \subsubsection{Evaluating using Previous text-based Captchas}
-In this section, we compare our result with previous works~\cite{Bursztein2011Text,Gao2016A,Bursztein2014The,George2017A} using the previous text-based Captchas.
+In this section, we compare our result with previous works~\cite{Bursztein2011Text,Gao2016A,Bursztein2014The} using the previous text-based Captchas.
 For the previous Captchas, the real world testing data are hard to be collected because most websites have updated their Captcha scheme which is more complex than prior one. To acquire the true previous Captchas, we first use some online Captcha generator such as Captcha.net to produce the true Captcha images. We then employ the generators that previous papers has provided to generate Captchas. If neither of the two cases, we use our Captcha generator to produce the testing data.
 
 Figure~\ref{fig: generate_show} depicts some Captcha examples of the previous real world Captchas and our generated versions that produced by our generator (Section~\ref{section: Captcha_generator}). Recall that our Captcha generator is able to generate the similar style Captchas with the real world Captcha scheme. So the generated Captcha has some subtle differences from the real one. For example, Figure~\ref{fig: generate_show} (e) shows the real Captcha deployed by Microsoft, and it slightly different from the generated one shown in (f) because the each character on Captcha image is randomly rotated and distorted.
@@ -143,6 +211,35 @@ Nevertheless, the generated Captchas contain the main features of the original r
   \label{fig: training_set}
 \end{figure}
 
+\begin{table}[t]
+    \centering
+    \caption{Classification results on both standard MNIST and generated dataset.}
+    \label{table: mnist}
+    \begin{tabular}{lccc}
+        \toprule
+        \multicolumn{4}{c}{MNIST dataset} \\
+        \midrule
+        \# of per class & 100  & 200 & 500\\
+        \midrule
+        RCN & 97.89\% & 98.10\% & 98.60\% \\
+        Ours & \textbf{91.40\%} & \textbf{94.50\%} & \textbf{98.75\%} \\
+        \toprule
+        \multicolumn{4}{c}{Single character dataset} \\
+        \midrule
+        \# of per class & 100  & 200 & 500\\
+        \midrule
+        RCN & 82.67\% & 81.13\% & xx.xx\% \\
+        Ours & \textbf{87.68\%} & \textbf{89.84\%} & \textbf{92.29\%} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Evaluation using MNIST datasets}
+We evaluate our approach using the MNIST datasets, and compared the results with the latest work~\cite{George2017A} which can recognize the MNIST with a high accuracy using a small number of training data. In this experiment, we selected 100, 200 and 500 MNIST examples for each digit for training, respectively.
+Table~\ref{table: mnist} demonstrate that our approach is superior to RCN when the total number of training examples more than 5000. Indeed, RCN performs better than ours when using a small number of training data as our approach cannot correctly transformed the similar characters to the regular one.
+
+In addition, we generated single character dataset which contains digits and English characters. Each character in this dataset is rotated and distorted. The stye of the generated dataset is a little like MNIST's style.
+We use such dataset to evaluate both RCN and our approach, and the results are shown in Table~\ref{table: mnist}. It obviously show that our approach is able to recognize most characters while RCN is invalid. Figure~\ref{fig: mnist_show} shows some examples of original data and the corresponding regular version.
 
 \subsection{Impact of the number of training data}
 We would like to know how the number of training examples affects the success rate of the attack. To do so, we used all the collected Captchas and we varied the number of training Captchas from 1000 to 100000 for each scheme. Figure~\ref{fig: training_set} shows how the cracking success rate changes as the number of training Captchas increases. When the size of the training examples is 100000, our approach can break 97.5\% VISHOP Captchas, 96.6\% Alipay Captchas, 80.4\% TOUP Captchas, 79.6\% BetEase Captchas and 48\% Baidu Captchas respectively. The success rate drops significantly when the number of training Captchas is less than 10000. Beyond this point, our approach cannot extract representative features of the Captchas. The degradation features makes it difficult for our algorithm to successful recognize the content of the Captcha image.
